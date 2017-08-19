@@ -1,26 +1,27 @@
 {
-  "name": "markdown-include",
-  "version": "0.4.3",
-  "description": "Include markdown files into other markdown files with C style syntax.",
+  "name": "no1-markdown-include",
+  "version": "0.4.4",
+  "description": "forked from markdown-include, fix to start by pm2",
   "main": "markdown-include.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sethen/markdown-include.git"
+    "url": "git+https://github.com/remembercode/markdown-include.git"
   },
   "keywords": [
     "markdown-include",
+    "no1-markdown-include",
     "markdown",
     "include"
   ],
   "bin": {
     "markdown-include": "./bin/cli.js"
   },
-  "author": "Sethen Maleno",
-  "license": "ISC",
+  "author": "WangBing",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sethen/markdown-include/issues"
+    "url": "https://github.com/remembercode/markdown-include/issues"
   },
-  "homepage": "https://github.com/sethen/markdown-include",
+  "homepage": "https://github.com/remembercode/markdown-include",
   "devDependencies": {
     "intern": "^2.2.2"
   },
@@ -29,6 +30,10 @@
   },
   "scripts": {
     "docs": "./bin/cli.js markdown.json",
-    "test": "node_modules/.bin/intern-client config=tests/intern.js"
+    "test": "intern-client config=tests/intern.js"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
   }
 }
