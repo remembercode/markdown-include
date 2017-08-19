@@ -8,7 +8,9 @@
 'use strict';
 
 var fs = require('fs');
+var _path = require('path');
 var q = require('q');
+var work_dir = "";
 
 this.ignoreTag = ' !ignore';
 this.headingTag = ' !heading';
@@ -112,14 +114,20 @@ exports.buildLinkString = function (str) {
 exports.compileFiles = function (path) {
 	var deferred = q.defer();
 	var self = this;
-
+	work_dir = _path.join(path, '..');
+	
 	fs.readFile(path, function (err, data) {
 		if (err) {
 			throw err;
 		}
 
 		self.options = JSON.parse(data.toString());
+		self.options.build = _path.join(work_dir, self.options.build);
+		for (let j = 0 ; j < self.options.files.length ; j++){
+			self.options.files[j] = _path.join(work_dir, self.options.files[j]);
+		}
 		var files = self.options.files;
+
 		var i;
 
 		for (i = 0; i < files.length; i += 1) {
@@ -293,7 +301,7 @@ exports.processIncludeTags = function (file, currentFile, tags) {
 
 	for (i = 0; i < tags.length; i += 1) {
 		var includeFile = this.parseIncludeTag(tags[i]);
-
+		includeFile = _path.join(work_dir,includeFile);
 		if (includeFile === currentFile) {
 			throw new Error('Circular injection ' + file + ' -> ' + includeFile + ' -> ' + file);
 		}
