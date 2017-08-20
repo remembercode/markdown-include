@@ -1,7 +1,8 @@
 /**
  * @author Sethen Maleno (https://github.com/sethen)
+ * @author Wang Bing (https://github.com/remembercode)
  * @description Include markdown files into other markdown files
- * @version  0.4.3
+ * @version  0.4.6
  */
 
 /* eslint-env node */
@@ -12,14 +13,6 @@ var _path = require('path');
 var q = require('q');
 var work_dir = "";
 
-this.ignoreTag = ' !ignore';
-this.headingTag = ' !heading';
-this.includePattern = /^#include\s"(.+\/|\/|\w|-|\/)+\.(md|markdown)"/gm;
-this.ignorePattern = new RegExp('^#include\\s"(.+\\/|\\/|\\w|-|\\/)+\.(md|markdown)"' + this.ignoreTag, 'gm');
-this.headingPattern = new RegExp('^#+\\s.+' + this.headingTag, 'gm');
-this.tableOfContents = '';
-this.build = {};
-this.customTags = [];
 
 /**
  * Build content item for navigation
@@ -112,6 +105,15 @@ exports.buildLinkString = function (str) {
  * @return {Object}      Promise to be resolved
  */
 exports.compileFiles = function (path) {
+	this.ignoreTag = ' !ignore';
+	this.headingTag = ' !heading';
+	this.includePattern = /^#include\s"(.+\/|\/|\w|-|\/)+\.(md|markdown)"/gm;
+	this.ignorePattern = new RegExp('^#include\\s"(.+\\/|\\/|\\w|-|\\/)+\.(md|markdown)"' + this.ignoreTag, 'gm');
+	this.headingPattern = new RegExp('^#+\\s.+' + this.headingTag, 'gm');
+	this.tableOfContents = '';
+	this.build = {};
+	this.customTags = [];
+
 	var deferred = q.defer();
 	var self = this;
 	work_dir = _path.join(path, '..');

@@ -1,6 +1,6 @@
 {
   "name": "no1-markdown-include",
-  "version": "0.4.4",
+  "version": "0.4.6",
   "description": "forked from markdown-include, fix to start by pm2",
   "main": "markdown-include.js",
   "repository": {
